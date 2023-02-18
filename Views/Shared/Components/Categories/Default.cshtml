@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Category>
+
+<div class="collapse navbar-collapse nav-item" id="navbarCollapse">
+    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" id="navbarDropdown" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+                Categories
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li>
+                    <a class="dropdown-item" asp-controller="Products" asp-action="Index" asp-route-categorySlug="">All Products</a>
+        </li>
+
+        @foreach (var item in Model)
+        {
+        <li>
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Index" asp-route-categorySlug="@item.Slug">@item.Name</a>
+                </li>
+        }
+</ul>
+</li>
+</ul>
+</div>

@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - ShoppingCart</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/stylesheet.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/ShoppingCart.styles.css" asp-append-version="true" />
+</head>
+<body>
+        <header>
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark text-bg-dark order-bottom box-shadow mb-3">
+                        <div class="container-fluid">
+                                <a class="navbar-brand" asp-area="" asp-controller="Products" asp-action="Index">SHOP</a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                        aria-expanded="false" aria-label="Toggle navigation">
+                                        <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                                        <ul class="navbar-nav flex-grow-1">
+
+                                                <li class="nav-item">
+                            <a class="btn btn-outline-primary" asp-area="" asp-controller="Products" asp-action="Index">Home</a>
+                                                </li>
+                        <vc:categories />
+                    </ul>
+                                                @if (User.Identity?.IsAuthenticated ?? false)
+                                                {
+                                                
+
+                     
+                        <div class="topnav-right">
+                            <vc:small-cart />
+                            <a class="btn btn-primary" asp-area="Admin" asp-controller="Products" asp-action="Index">Products</a>
+                            <a class="btn btn-danger" asp-controller="Account" asp-action="Logout">Log out</a>
+                        </div>
+                                                 <!--       @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+                                                        {
+                                                                 <div class="nav-right">
+                                                
+                                                                         <a class="btn btn-danger" asp-controller="Account" asp-action="Logout">Log out</a>
+                                                                   </div>
+                                                        }
+                                                    -->
+                                                }
+                   
+                                                else
+                                                {
+                                                        <div class="topnav-right">
+                                                          <vc:small-cart />
+                                                      <a class="btn btn-primary" asp-controller="Cart" asp-action="Index">View Cart</a>
+                                                                <a class="btn btn-success" asp-controller="Account" asp-action="Login">Login</a>
+                                                                  <a class="btn btn-warning" asp-controller="Account" asp-action="Create">Register</a>
+
+                                                        </div>
+                                                }
+                    
+                                </div>
+                        </div>
+                </nav>
+        </header>
+
+                                        <partial name="_NotificationPartial" />
+                                        @RenderBody()
+
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
